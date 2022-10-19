@@ -1,0 +1,14 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: Verdana, sans-serif;
+}
+
+body {
+  background-color: rgb(29, 158, 253);
+}
+
+.hide {
+  display: none;
+}
