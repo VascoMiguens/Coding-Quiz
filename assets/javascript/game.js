@@ -47,22 +47,54 @@ function startGame() {
   //Start at the first question
   currentQuestion = 0;
 
+  //hide the start button after starting the quiz
   startBtn.classList.add("hide");
+  //show the question
   questionContainerElement.classList.remove("hide");
   displayQuestion();
 }
-
+//Display the questions whit a loop
 function displayQuestion() {
   var question = questions[currentQuestion];
   questionEl.textContent = question.title;
 
+  //Clear the previous buttons
+  choicesEl.innerHTML = "";
+
+  //iterate every choice in the questions object
   for (var i = 0; i < question.choices.length; i++) {
+    //create a button for each choice
     var button = document.createElement("button");
+    //add the class btn
     button.classList.add("btn");
+    //populate each button create with a choice
     button.textContent = question.choices[i];
+    //when the user clicks on a choice call function questionCheck
     button.onclick = questionCheck;
+    //append the button to the parent element
     choicesEl.appendChild(button);
   }
+}
+
+function questionCheck() {
+  //increase the question index
+  currentQuestion++;
+
+  //Check if the index of the current question is equal to the total number of questions
+  if (currentQuestion === questions.length) {
+    //if it is end the game
+    endGame();
+  } else {
+    //if not display next question
+    displayQuestion();
+  }
+}
+
+function endGame() {
+  //hide the questions
+  questionContainerElement.classList.add("hide");
+  //display the start button
+  startBtn.classList.remove("hide");
 }
 
 startBtn.addEventListener("click", startGame);
