@@ -38,12 +38,12 @@ var startBtn = document.getElementById("start-btn");
 var questionContainerElement = document.getElementById("question-container");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("answer-buttons");
+var currentScore = document.getElementById("currentScore");
 
 var questionTime = questions.length * 15;
 var currentQuestion;
 var time;
 var score = 0;
-//
 
 //function to initialize the game
 function startGame() {
@@ -69,7 +69,6 @@ function startGame() {
   questionContainerElement.classList.remove("hide");
   //call the function to display the question
   displayQuestion();
-  //display time when
 }
 //Display the questions whit a loop
 function displayQuestion() {
@@ -77,7 +76,7 @@ function displayQuestion() {
   questionEl.textContent = question.title;
 
   //Clear the previous buttons
-  choicesEl.innerHTML = "";
+  choicesEl.textContent = "";
 
   //iterate every choice in the questions object
   for (var i = 0; i < question.choices.length; i++) {
@@ -89,12 +88,23 @@ function displayQuestion() {
     button.textContent = question.choices[i];
     //when the user clicks on a choice call function questionCheck
     button.onclick = questionCheck;
+
     //append the button to the parent element
     choicesEl.appendChild(button);
   }
 }
 
-function questionCheck() {
+function questionCheck(e) {
+  //if clicked button equals to the current question correct answer
+  if (e.currentTarget.textContent === questions[currentQuestion].answer) {
+    //increase the score by 10
+    score += 10;
+  } else {
+    //if not decrease the timeer by 10 seconds
+    questionTime -= 10;
+  }
+  //set the text content with the current score
+  currentScore.textContent = score;
   //increase the question index
   currentQuestion++;
 
