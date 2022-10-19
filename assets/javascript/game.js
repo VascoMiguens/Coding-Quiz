@@ -39,19 +39,37 @@ var questionContainerElement = document.getElementById("question-container");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("answer-buttons");
 
-var time = 0;
+var questionTime = questions.length * 15;
 var currentQuestion;
+var time;
+var score = 0;
+//
 
 //function to initialize the game
 function startGame() {
   //Start at the first question
   currentQuestion = 0;
-
+  //start counting down the timer
+  time = setInterval(function () {
+    //if time is less or equal to zero end game
+    if (questionTime < 0) {
+      endGame();
+      time = 0;
+    } else {
+      //if not display the time
+      timerEl.textContent = questionTime;
+    }
+    //decrease time by 1
+    questionTime--;
+  }, 1000);
   //hide the start button after starting the quiz
   startBtn.classList.add("hide");
+  timerEl.classList.remove("hide");
   //show the question
   questionContainerElement.classList.remove("hide");
+  //call the function to display the question
   displayQuestion();
+  //display time when
 }
 //Display the questions whit a loop
 function displayQuestion() {
@@ -91,6 +109,8 @@ function questionCheck() {
 }
 
 function endGame() {
+  //clear the timer
+  clearInterval(time);
   //hide the questions
   questionContainerElement.classList.add("hide");
   //display the start button
