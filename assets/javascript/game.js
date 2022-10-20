@@ -157,7 +157,7 @@ function startTimer() {
 }
 
 function saveResults(e) {
-  //prevent default
+  //prevent default action
   e.preventDefault();
   //save the initials in a variable
   var initials = initialsEl.value;
