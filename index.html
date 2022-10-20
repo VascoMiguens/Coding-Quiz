@@ -9,9 +9,6 @@
   </head>
   <body>
     <header>
-      <div id="scoreBoard">
-        <a href="/scores.htmk" class="btn">ScoreBoard</a>
-      </div>
       <div id="timer" class="hide"></div>
     </header>
     <main>
@@ -21,8 +18,16 @@
           <div id="currentScore">Score:</div>
           <div id="answer-buttons" class="btn-grid"></div>
         </div>
+        <div id="result" class="hide">
+          <h2>Well done!</h2>
+          <h3>Your final score is: <span id="final-score"></span></h3>
+          <label for="initials-area">Enter your initials:</label>
+          <input type="text" id="initials" placeholder="Enter your initials" />
+          <button id="submit" type="submit">Submit</button>
+        </div>
         <div class="controls">
           <button id="start-btn" class="start-btn">Start</button>
+          <button id="score-btn" class="score-btn">Scoreboard</button>
         </div>
       </div>
     </main>
