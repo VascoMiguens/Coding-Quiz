@@ -206,8 +206,81 @@ main {
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  opacity: 1;
   padding: 8px 18px;
-  width: fit-content;
+  width: 200px;
   border: 0;
+}
+
+@media screen and (max-width: 1025px) {
+  #question {
+    margin-top: 20px;
+  }
+
+  #result {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  header {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  #question {
+    font-size: 1rem;
+    padding: 0;
+    height: 100px;
+  }
+  .btn-display {
+    width: 150px;
+  }
+  #question {
+    margin-top: 0;
+  }
+
+  #answer-buttons {
+    justify-content: none;
+  }
+
+  #controls {
+    flex-direction: column;
+  }
+
+  #result h2 {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .btn-display {
+    width: 100px;
+    font-size: 10px;
+  }
+  #result {
+    margin: 5px;
+  }
+
+  #result input {
+    width: 50px;
+  }
+
+  #scoreboard-container h2,
+  #rules h2 {
+    font-size: 1rem;
+  }
+
+  #rules li {
+    margin-bottom: 1px;
+    font-size: 15px;
+  }
+
+  #scoreboard span {
+    width: 100px;
+    font-size: 0.8rem;
+  }
 }

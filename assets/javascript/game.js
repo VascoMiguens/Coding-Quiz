@@ -101,6 +101,7 @@ function displayQuestion() {
   for (var i = 0; i < question.choices.length; i++) {
     //create a button for each choice
     var button = document.createElement("button");
+
     //add the class btn
     button.classList.add("btn");
     //populate each button create with a choice
@@ -109,6 +110,11 @@ function displayQuestion() {
     button.onclick = questionCheck;
     //append the button to the parent element
     choicesEl.appendChild(button);
+    //flex buttons in a column according to screen size
+    realWidth = window.screen.width * window.devicePixelRatio;
+    if (realWidth <= 992) {
+      controls.style.cssText = "flex-direction: column";
+    }
   }
 }
 //check user answer and if its the last question
@@ -157,6 +163,11 @@ function endGame() {
   startBtn.style.display = "block";
   //display scoreboard button
   scoreBtn.style.display = "none";
+  //flex buttons in a column according to screen size
+  realWidth = window.screen.width * window.devicePixelRatio;
+  if (realWidth <= 992) {
+    controls.style.cssText = "flex-direction: column";
+  }
 }
 //Start timer when quiz starts
 function startTimer() {
@@ -236,6 +247,11 @@ function displayScoreBoard() {
 
   //flex the controls in a row
   controls.style.cssText = "display: flex; flex-direction:row";
+  //flex buttons in a column according to screen size
+  realWidth = window.screen.width * window.devicePixelRatio;
+  if (realWidth <= 700) {
+    controls.style.cssText = "flex-direction: column";
+  }
 }
 
 function displayRules() {
