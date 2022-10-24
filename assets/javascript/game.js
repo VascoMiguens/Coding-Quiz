@@ -33,17 +33,24 @@ var questions = [
   },
 ];
 
+var timerCont = document.getElementById("timer-container");
 var timerEl = document.getElementById("timer");
 var startBtn = document.getElementById("start-btn");
 var sumbitBtn = document.getElementById("submit");
 var questionContainerElement = document.getElementById("question-container");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("answer-buttons");
-var currentScore = document.getElementById("currentScore");
 var result = document.getElementById("result");
 var finalScore = document.getElementById("final-score");
 var initialsEl = document.getElementById("initials");
-var MAX_HIGH_SCORES = 5;
+var scoreEL = document.getElementById("scoreboard-container");
+var scoreboard = document.getElementById("scoreboard");
+var scoreBtn = document.getElementById("score-btn");
+var controls = document.getElementById("controls");
+var correct = new Audio("/assets/sounds/correct.wav");
+var incorrect = new Audio("/assets/sounds/incorrect.wav");
+
+var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
 
 var questionTime;
 var score = 0;
@@ -56,16 +63,18 @@ function startGame() {
   currentQuestion = 0;
   //hide the start button after starting the quiz
   startBtn.classList.add("hide");
-  //hide the results container
-  result.classList.add("hide");
   //show the timer when the quiz starts
-  timerEl.classList.remove("hide");
-  //show the question
-  questionContainerElement.classList.remove("hide");
+  timerCont.style.display = "block";
+  //hide the results
+  result.style.display = "none";
+  //hide the scoreboard
+  scoreEL.style.display = "none";
+  //hide the start button
+  startBtn.classList.add("hide");
+  //hide the timer
+  questionContainerElement.style.display = "flex";
   //set the score to 0
   score = 0;
-  //show the core
-  currentScore.textContent = score;
   //call the function to display the question
   displayQuestion();
   //call the timer function
@@ -95,18 +104,21 @@ function displayQuestion() {
     choicesEl.appendChild(button);
   }
 }
-
+//check user answer and if its the last question
 function questionCheck(e) {
   //if clicked button equals to the current question correct answer
   if (e.currentTarget.textContent === questions[currentQuestion].answer) {
     //increase the score by 10
     score += 10;
+    //play correct sound
+    correct.play();
+    //
   } else {
-    //if not decrease the timeer by 10 seconds
+    //if not decrease the timer by 10 seconds
     questionTime -= 10;
+    //play incorrect sound
+    incorrect.play();
   }
-  //set the text content with the current score
-  currentScore.textContent = score;
   //increase the question index
   currentQuestion++;
 
@@ -119,22 +131,26 @@ function questionCheck(e) {
     displayQuestion();
   }
 }
-
+//End the game and display final score
 function endGame() {
   //clear the timer
   clearInterval(time);
-  //Erase time displayed after the game is over
-  timerEl.textContent = "";
+  //hide the timer after quiz ends
+  timerCont.style.display = "none";
   //hide the questions
-  questionContainerElement.classList.add("hide");
-  //hide the result container
-  result.classList.remove("hide");
-  //display the final score
-  finalScore.textContent = score;
+  questionContainerElement.style.display = "none";
+  //show the result container
+  result.style.display = "flex";
+  //display the final score, add the correct answers to the remaining time*/
+  finalScore.textContent = score + questionTime;
+  //use csssText to flex the controls element making it apper on the UI in a row
+  controls.style.cssText = "display: flex; flex-direction:row";
   //display the start button
-  startBtn.classList.remove("hide");
+  startBtn.style.display = "block";
+  //display scoreboard button
+  scoreBtn.style.display = "block";
 }
-
+//Start timer when quiz starts
 function startTimer() {
   //Time available to play the game
   questionTime = questions.length * 15;
@@ -144,8 +160,8 @@ function startTimer() {
     timerEl.textContent = questionTime;
     //decrease time by 1 second
     questionTime--;
-    //if the time is less than 0
-    if (questionTime < 0) {
+    //if the time is less or equal to 0
+    if (questionTime <= 0) {
       //clear the time
       clearInterval(time);
       //set the displayed time to 0
@@ -155,7 +171,7 @@ function startTimer() {
     }
   }, 1000);
 }
-
+//save results to the local storage
 function saveResults(e) {
   //prevent default action
   e.preventDefault();
@@ -173,13 +189,35 @@ function saveResults(e) {
 
     //sort the scores higher to lower
     highscores.sort((a, b) => b.score - a.score);
+
+    console.log(highscores);
     //allow only the top 5 scores with splice
     highscores.splice(5);
 
     //pass the highscores array into the local storage as a stringD
-    localStorage.setItem("highScores", JSON.stringify(highscores));
+    window.localStorage.setItem("highScores", JSON.stringify(highscores));
+    initialsEl.value = "";
   }
+}
+
+function displayScoreBoard() {
+  //hide the final score display
+  result.style.display = "none";
+  //fetch the highscores from the local storage and store it in a variable
+  var scores = JSON.parse(localStorage.getItem("highScores"));
+
+  scoreboard.innerHTML = scores
+    .map((score) => {
+      return `<span>${score.initials} - ${score.score}</span>`;
+    })
+    //remove comma from object
+    .join("");
+
+  scoreBtn.style.display = "none";
+  //display the scoreboard
+  scoreEL.style.display = "flex";
 }
 
 startBtn.addEventListener("click", startGame);
 sumbitBtn.addEventListener("click", saveResults);
+scoreBtn.addEventListener("click", displayScoreBoard);

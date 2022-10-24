@@ -4,11 +4,198 @@
   box-sizing: border-box;
   font-family: Verdana, sans-serif;
 }
-
+/*Give full wihth and height to the page*/
 body {
-  background-color: rgb(29, 158, 253);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*User interface*/
+.container {
+  border: 1px solid white;
+  width: 50vw;
+  height: 80vh;
+  box-shadow: 0 0 10px 2px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(61, 90, 128);
+  border-radius: 20px;
+}
+/*Title of the game*/
+header {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(238, 108, 77);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
+h1 {
+  text-align: center;
+  color: white;
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.5);
+  flex-grow: 1;
+}
+/* Hide time container before the quiz starts*/
+#timer-container {
+  display: none;
+  background-color: rgb(152, 193, 217);
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 5px;
+}
+/* highlight time by chaging bacground color */
+#timer {
+  background-color: rgb(41, 50, 65);
+  height: 100%;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+/* Center UI in the center of the screen*/
+main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Align question container below the title and hide it before the quiz begins*/
+#question-container {
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 0 1;
+}
+/* give a height to the question */
+#question {
+  height: 150px;
+  margin-top: 50px;
+  font-size: 1.3rem;
+  text-align: left;
+  padding: 10px 10px;
+  color: white;
+  font-weight: 900;
+}
+/* flex the answer buttons container */
+#answer-buttons {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+/* Customize each answer button */
+.btn {
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  width: 40vw;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: rgb(41, 50, 65);
+  outline: none;
+  font-weight: 900;
+  box-shadow: 0 0 10px 1px white;
+}
+/* Final result container*/
+/* Hide it while quiz is running*/
+#result {
+  width: 80%;
+  height: 80%;
+  margin: 50px;
+  background-color: #e0fbfc;
+  display: none;
+  border: 0;
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+}
+
+#final-score {
+  flex-grow: 1;
+}
+
+#result h2 {
+  font-size: 2rem;
+}
+
+#result label {
+  margin-top: 10px;
+}
+
+#result input {
+  margin: 10px;
+}
+
+#result button {
+  margin-bottom: 20px;
+}
+/* Flex cotrols container in a column */
+#controls {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+/* hide the scoreboard container and flex it in a column */
+#scoreboard-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+#scoreboard-container h2 {
+  font-size: 1.7rem;
+  color: white;
+}
+/* flex the scoreboard in a column */
+#scoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+/* Customize the scoreboard items*/
+#scoreboard span {
+  width: 180px;
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 0 3px 1px black;
+}
+/* Custom class to hide button*/
 .hide {
   display: none;
+}
+/* Customize controls buttons*/  
+.btn-display {
+  background: rgb(69, 143, 186);
+  border-radius: 5px;
+  box-shadow: rgb(69, 143, 186) 0 5px 15px -8px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  padding: 8px 18px;
+  width: fit-content;
+  border: 0;
 }

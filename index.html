@@ -8,29 +8,42 @@
     <link rel="stylesheet" href="/assets/css/style.css" />
   </head>
   <body>
-    <header>
-      <div id="timer" class="hide"></div>
-    </header>
-    <main>
-      <div class="container">
-        <div id="question-container" class="hide">
+    <!--  Page Container -->
+    <div class="container">
+      <!-- HEADER -->
+      <header>
+        <h1>Coding Quiz</h1>
+        <div id="timer-container">Time Left: <span id="timer">75</span></div>
+      </header>
+      <!-- END HEADER -->
+      <!-- Main -->
+      <main>
+        <!-- Question Container -->
+        <section id="question-container">
           <div id="question">Question</div>
-          <div id="currentScore">Score:</div>
-          <div id="answer-buttons" class="btn-grid"></div>
-        </div>
-        <div id="result" class="hide">
+          <div id="answer-buttons"></div>
+        </section>
+        <!-- Final Result Container -->
+        <section id="result">
           <h2>Well done!</h2>
-          <h3>Your final score is: <span id="final-score"></span></h3>
+          <h3>Final Score</h3>
+          <span id="final-score"></span>
           <label for="initials-area">Enter your initials:</label>
           <input type="text" id="initials" placeholder="Enter your initials" />
-          <button id="submit" type="submit">Submit</button>
-        </div>
-        <div class="controls">
-          <button id="start-btn" class="start-btn">Start</button>
-          <button id="score-btn" class="score-btn">Scoreboard</button>
-        </div>
-      </div>
-    </main>
+          <button id="submit" class="btn-display" type="submit">Submit</button>
+        </section>
+        <!-- Scoreboard -->
+        <section id="scoreboard-container">
+          <h2>High Scores</h2>
+          <div id="scoreboard"></div>
+        </section>
+        <!-- Controls -->
+        <section id="controls">
+          <button id="start-btn" class="btn-display">Start</button>
+          <button id="score-btn" class="btn-display">Scoreboard</button>
+        </section>
+      </main>
+    </div>
   </body>
   <script src="/assets/javascript/game.js"></script>
 </html>
