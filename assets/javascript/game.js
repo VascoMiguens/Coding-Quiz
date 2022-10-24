@@ -67,7 +67,7 @@ function startGame() {
   //Start at the first question
   currentQuestion = 0;
   //hide the start button after starting the quiz
-  startBtn.classList.add("hide");
+  startBtn.style.display = "none";
   //show the timer when the quiz starts
   timerCont.style.display = "block";
   //hide the results
@@ -75,10 +75,10 @@ function startGame() {
   //hide the scoreboard
   scoreEL.style.display = "none";
   //hide the start button
-  startBtn.classList.add("hide");
+  startBtn.style.display = "none";
   //hide the timer
   questionContainerElement.style.display = "flex";
-  //
+  //flex the controls buttons in a row
   controls.style.cssText = "display: flex; flex-direction:row";
   //set the score to 0
   score = 0;
@@ -102,7 +102,7 @@ function displayQuestion() {
     //create a button for each choice
     var button = document.createElement("button");
     //add the class btn
-    button.classList.add("btn");
+    button.style.display = "block";
     //populate each button create with a choice
     button.textContent = question.choices[i];
     //when the user clicks on a choice call function questionCheck
@@ -119,7 +119,6 @@ function questionCheck(e) {
     score += 10;
     //play correct sound
     correct.play();
-    //
   } else {
     //if not decrease the timer by 10 seconds
     questionTime -= 10;
@@ -157,7 +156,7 @@ function endGame() {
   //display the start button
   startBtn.style.display = "block";
   //display scoreboard button
-  scoreBtn.style.display = "block";
+  scoreBtn.style.display = "none";
 }
 //Start timer when quiz starts
 function startTimer() {
@@ -217,7 +216,7 @@ function displayScoreBoard() {
   //hide the questions
   questionContainerElement.style.display = "none";
   //Display the start button
-  startBtn.classList.remove("hide");
+  startBtn.style.display = "block";
   //iterate each item saved in local storage and display it
   scoreboard.innerHTML = highscores
     .map((score) => {
@@ -230,10 +229,17 @@ function displayScoreBoard() {
   scoreBtn.style.display = "none";
   //display the scoreboard
   scoreEL.style.display = "flex";
+  //hide timer container
+  timerCont.style.display = "none";
+  //clear interval
+  clearInterval(time);
+
+  //flex the controls in a row
+  controls.style.cssText = "display: flex; flex-direction:row";
 }
 
 function displayRules() {
-  //hide the scoreboard if access throught the scoreboard page
+  //hide the scoreboard if accessed throught the scoreboard page
   scoreEL.style.display = "none";
   //hide controls element
   controls.style.display = "none";
@@ -243,6 +249,8 @@ function displayRules() {
   result.style.display = "none";
   //hide questions element if users accesses it while playing
   questionContainerElement.style.display = "none";
+  //hide timer container
+  timerCont.style.display = "none";
 }
 
 startBtn.addEventListener("click", startGame);

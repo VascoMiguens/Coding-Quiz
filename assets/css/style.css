@@ -195,10 +195,7 @@ main {
   font-weight: bold;
   box-shadow: 0 0 3px 1px black;
 }
-/* Custom class to hide button*/
-.hide {
-  display: none;
-}
+
 /* Customize controls buttons*/
 .btn-display {
   background: rgb(69, 143, 186);
