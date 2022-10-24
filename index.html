@@ -18,6 +18,21 @@
       <!-- END HEADER -->
       <!-- Main -->
       <main>
+        <section>
+          <div id="rules">
+            <h2>Rules</h2>
+            <ul>
+              <li>Lenght = Number of questions times 15 seconds</li>
+              <li>Correct Answer = + 10 points</li>
+              <li>
+                Incorrect Answer = - 10 seconds<br />
+                of the remaining time
+              </li>
+              <li>Total Score = Correct Ansers + remaining time</li>
+            </ul>
+            <button id="back-btn" class="btn-display">Back</button>
+          </div>
+        </section>
         <!-- Question Container -->
         <section id="question-container">
           <div id="question">Question</div>
@@ -40,6 +55,7 @@
         <!-- Controls -->
         <section id="controls">
           <button id="start-btn" class="btn-display">Start</button>
+          <button id="rules-btn" class="btn-display">Rules</button>
           <button id="score-btn" class="btn-display">Scoreboard</button>
         </section>
       </main>

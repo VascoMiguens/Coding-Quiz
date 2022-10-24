@@ -35,8 +35,14 @@ var questions = [
 
 var timerCont = document.getElementById("timer-container");
 var timerEl = document.getElementById("timer");
+
+//buttons
 var startBtn = document.getElementById("start-btn");
 var sumbitBtn = document.getElementById("submit");
+var scoreBtn = document.getElementById("score-btn");
+var rulesBtn = document.getElementById("rules-btn");
+var backBtn = document.getElementById("back-btn");
+
 var questionContainerElement = document.getElementById("question-container");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("answer-buttons");
@@ -45,7 +51,8 @@ var finalScore = document.getElementById("final-score");
 var initialsEl = document.getElementById("initials");
 var scoreEL = document.getElementById("scoreboard-container");
 var scoreboard = document.getElementById("scoreboard");
-var scoreBtn = document.getElementById("score-btn");
+var rules = document.getElementById("rules");
+
 var controls = document.getElementById("controls");
 var correct = new Audio("/assets/sounds/correct.wav");
 var incorrect = new Audio("/assets/sounds/incorrect.wav");
@@ -71,6 +78,8 @@ function startGame() {
   startBtn.classList.add("hide");
   //hide the timer
   questionContainerElement.style.display = "flex";
+  //
+  controls.style.cssText = "display: flex; flex-direction:row";
   //set the score to 0
   score = 0;
   //call the function to display the question
@@ -205,6 +214,10 @@ function saveResults(e) {
 function displayScoreBoard() {
   //hide the final score display
   result.style.display = "none";
+  //hide the questions
+  questionContainerElement.style.display = "none";
+  //Display the start button
+  startBtn.classList.remove("hide");
   //iterate each item saved in local storage and display it
   scoreboard.innerHTML = highscores
     .map((score) => {
@@ -219,6 +232,24 @@ function displayScoreBoard() {
   scoreEL.style.display = "flex";
 }
 
+function displayRules() {
+  //hide the scoreboard if access throught the scoreboard page
+  scoreEL.style.display = "none";
+  //hide controls element
+  controls.style.display = "none";
+  //display the rules element
+  rules.style.display = "flex";
+  //hide final reult element
+  result.style.display = "none";
+  //hide questions element if users accesses it while playing
+  questionContainerElement.style.display = "none";
+}
+
 startBtn.addEventListener("click", startGame);
 sumbitBtn.addEventListener("click", saveResults);
 scoreBtn.addEventListener("click", displayScoreBoard);
+rulesBtn.addEventListener("click", displayRules);
+backBtn.addEventListener("click", function () {
+  //refresh page and display initial page
+  window.location.reload();
+});

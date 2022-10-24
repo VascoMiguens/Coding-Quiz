@@ -64,6 +64,20 @@ main {
   flex-direction: column;
   align-items: center;
 }
+/* Rules */
+#rules {
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+#rules li {
+  color: white;
+  margin-bottom: 10px;
+}
+
 /* Align question container below the title and hide it before the quiz begins*/
 #question-container {
   height: 100%;
@@ -157,7 +171,8 @@ main {
   height: 100%;
 }
 
-#scoreboard-container h2 {
+#scoreboard-container h2,
+#rules h2 {
   font-size: 1.7rem;
   color: white;
 }
@@ -184,7 +199,7 @@ main {
 .hide {
   display: none;
 }
-/* Customize controls buttons*/  
+/* Customize controls buttons*/
 .btn-display {
   background: rgb(69, 143, 186);
   border-radius: 5px;
