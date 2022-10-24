@@ -102,7 +102,7 @@ function displayQuestion() {
     //create a button for each choice
     var button = document.createElement("button");
     //add the class btn
-    button.style.display = "block";
+    button.classList.add("btn");
     //populate each button create with a choice
     button.textContent = question.choices[i];
     //when the user clicks on a choice call function questionCheck
