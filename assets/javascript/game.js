@@ -49,9 +49,7 @@ var scoreBtn = document.getElementById("score-btn");
 var controls = document.getElementById("controls");
 var correct = new Audio("/assets/sounds/correct.wav");
 var incorrect = new Audio("/assets/sounds/incorrect.wav");
-
 var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
-
 var questionTime;
 var score = 0;
 var currentQuestion;
@@ -141,8 +139,10 @@ function endGame() {
   questionContainerElement.style.display = "none";
   //show the result container
   result.style.display = "flex";
+  //add time remaining to the correct questions
+  score = score + questionTime;
   //display the final score, add the correct answers to the remaining time*/
-  finalScore.textContent = score + questionTime;
+  finalScore.textContent = score;
   //use csssText to flex the controls element making it apper on the UI in a row
   controls.style.cssText = "display: flex; flex-direction:row";
   //display the start button
@@ -175,13 +175,14 @@ function startTimer() {
 function saveResults(e) {
   //prevent default action
   e.preventDefault();
+
   //save the initials in a variable
   var initials = initialsEl.value;
   //if the initials variable is not empty save the score to the local storage
   if (initials !== "") {
     //Create object white username initials and final score
     var newScore = {
-      score: score + questionTime,
+      score: score,
       initials: initials,
     };
     //Push new user score to the highscores array
@@ -190,29 +191,29 @@ function saveResults(e) {
     //sort the scores higher to lower
     highscores.sort((a, b) => b.score - a.score);
 
-    console.log(highscores);
     //allow only the top 5 scores with splice
     highscores.splice(5);
 
-    //pass the highscores array into the local storage as a stringD
-    window.localStorage.setItem("highScores", JSON.stringify(highscores));
+    //store the highscores array into the local storage as a string
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+    //erase input field after submission
     initialsEl.value = "";
+    displayScoreBoard();
   }
 }
 
 function displayScoreBoard() {
   //hide the final score display
   result.style.display = "none";
-  //fetch the highscores from the local storage and store it in a variable
-  var scores = JSON.parse(localStorage.getItem("highScores"));
-
-  scoreboard.innerHTML = scores
+  //iterate each item saved in local storage and display it
+  scoreboard.innerHTML = highscores
     .map((score) => {
       return `<span>${score.initials} - ${score.score}</span>`;
     })
     //remove comma from object
     .join("");
 
+  //hide scoreboard button
   scoreBtn.style.display = "none";
   //display the scoreboard
   scoreEL.style.display = "flex";
