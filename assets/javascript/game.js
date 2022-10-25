@@ -54,8 +54,8 @@ var scoreboard = document.getElementById("scoreboard");
 var rules = document.getElementById("rules");
 
 var controls = document.getElementById("controls");
-var correct = new Audio("/assets/sounds/correct.wav");
-var incorrect = new Audio("/assets/sounds/incorrect.wav");
+var correct = new Audio("assets/sounds/correct.wav");
+var incorrect = new Audio("assets/sounds/incorrect.wav");
 var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
 var questionTime;
 var score = 0;
